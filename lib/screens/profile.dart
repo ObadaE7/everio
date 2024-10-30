@@ -1,3 +1,4 @@
+import 'package:everio/screens/account.dart';
 import 'package:flutter/material.dart';
 import 'package:everio/utils/colors.dart';
 import 'package:iconly/iconly.dart';
@@ -11,6 +12,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final List<Widget> _screens = [
+    Account(),
+  ];
   List<String> titles = [
     'Account',
     'Security',
@@ -145,7 +149,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16.0),
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => _screens[index],
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(height: 10.0),
                     ],

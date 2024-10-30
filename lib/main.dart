@@ -1,4 +1,4 @@
-import 'package:everio/auth/login_screen.dart';
+import 'package:everio/auth/login.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());

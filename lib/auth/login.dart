@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:everio/utils/colors.dart';
-import 'package:everio/screens/tabs_screen.dart';
+import 'package:everio/utils/sizes.dart';
+import 'package:everio/widgets/input_field.dart';
+import 'package:everio/screens/tabs.dart';
+import 'package:everio/data/dummy_data.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,18 +15,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(AppSizes.kPaddingNormal),
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Center(
                   child: Text(
@@ -35,100 +36,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: AppSizes.kPaddingNormal),
                 Form(
                   key: widget._formKey,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Email',
-                        style: TextStyle(
-                          color: AppColors.secondaryDark,
-                          fontSize: 20.0,
-                        ),
+                      InputField(
+                        field: 'Email',
+                        hintText: 'Enter your email',
+                        initialValue: dummyUser[0].email,
+                        prefixIcon: HugeIcons.strokeRoundedMail02,
+                        autoValidate: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter an email';
+                          }
+                          final emailRegex = RegExp(
+                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Please enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
-                      TextFormField(
-                          decoration: InputDecoration(
-                            prefixIcon: const HugeIcon(
-                              icon: HugeIcons.strokeRoundedMail02,
-                              color: AppColors.secondaryDark,
-                            ),
-                            hintText: 'example@example.com',
-                            hintStyle: TextStyle(
-                              color: AppColors.secondaryDark.withOpacity(.4),
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.secondaryLight.withOpacity(.5),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(16.0),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 16.0,
-                            ),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          maxLength: 50,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter an email';
-                            }
-                            final emailRegex = RegExp(
-                                r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                            if (!emailRegex.hasMatch(value)) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          }),
-                      const SizedBox(height: 20.0),
-                      const Text(
-                        'Password',
-                        style: TextStyle(
-                          color: AppColors.secondaryDark,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          prefixIcon: const HugeIcon(
-                            icon: HugeIcons.strokeRoundedLockPassword,
-                            color: AppColors.secondaryDark,
-                          ),
-                          suffixIcon: IconButton(
-                              onPressed: () => setState(
-                                    () => _isPasswordVisible =
-                                        !_isPasswordVisible,
-                                  ),
-                              icon: Icon(
-                                _isPasswordVisible
-                                    ? HugeIcons.strokeRoundedView
-                                    : HugeIcons.strokeRoundedViewOff,
-                                color: AppColors.secondaryDark,
-                              )),
-                          hintText: '•••••••••',
-                          hintStyle: TextStyle(
-                            color: AppColors.secondaryDark.withOpacity(.4),
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.normal,
-                          ),
-                          filled: true,
-                          fillColor: AppColors.secondaryLight.withOpacity(.5),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 16.0,
-                          ),
-                        ),
-                        obscureText: !_isPasswordVisible,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        maxLength: 20,
+                      const SizedBox(height: AppSizes.kPaddingNormal),
+                      InputField(
+                        field: 'Password',
+                        hintText: 'Enter your password',
+                        isPassword: true,
+                        prefixIcon: HugeIcons.strokeRoundedLockPassword,
+                        autoValidate: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter a password';
@@ -239,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: AppSizes.kPaddingNormal),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: AppSizes.kPaddingNormal),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

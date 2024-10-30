@@ -1,3 +1,4 @@
+import 'package:everio/data/dummy_data.dart';
 import 'package:flutter/material.dart';
 import 'package:everio/utils/colors.dart';
 import 'package:everio/utils/sizes.dart';
@@ -54,9 +55,9 @@ class _MainDrawerState extends State<MainDrawer> {
               ),
               child: Column(
                 children: [
-                  const Text(
-                    'Obada Daraghmeh',
-                    style: TextStyle(
+                  Text(
+                    dummyUser[0].name,
+                    style: const TextStyle(
                       color: AppColors.primaryDark,
                       fontSize: AppSizes.kTextHeading,
                       fontWeight: FontWeight.bold,
@@ -87,11 +88,11 @@ class _MainDrawerState extends State<MainDrawer> {
               backgroundColor: AppColors.primaryGreen.withOpacity(.3),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 100.0,
             child: CircleAvatar(
               radius: 50.0,
-              backgroundImage: AssetImage('assets/avatars/avatar-1.png'),
+              backgroundImage: AssetImage(dummyUser[0].imageUrl),
             ),
           ),
         ],

@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:everio/models/user.dart';
 import 'package:everio/models/category.dart';
 import 'package:everio/models/clothe.dart';
 import 'package:hugeicons/hugeicons.dart';
+
+var dummyUser = [
+  User(
+    id: 1,
+    // username: 'obada7.e',
+    name: 'Obada Daraghmeh',
+    email: 'oL8wA@example.com',
+    imageUrl: 'assets/avatars/avatar-1.png',
+    dateOfBirth: DateTime(2000, 5, 8),
+    address: 'Palestine, Tubas',
+    password: 'Ob2024@everio',
+  ),
+];
 
 const dummyCategories = [
   Category(

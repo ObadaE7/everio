@@ -1,5 +1,5 @@
 import 'package:everio/models/clothe.dart';
-import 'package:everio/screens/product_details_screen.dart';
+import 'package:everio/screens/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:everio/utils/colors.dart';
 import 'package:everio/utils/sizes.dart';
